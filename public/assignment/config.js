@@ -1,7 +1,8 @@
-"use strict"
+"use strict";
 (function(){
-    angular.module("FormBuilderApp")
-    angular.config(function($routeProvider){
+    angular
+        .module("FormBuilderApp")
+        .config(function($routeProvider){
         $routeProvider
             .when("/home",{
                 templateUrl:"./views/home/home.view.html"
