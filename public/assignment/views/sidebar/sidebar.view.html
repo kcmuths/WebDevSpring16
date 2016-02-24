@@ -1,9 +1,9 @@
 <div class="col-sm-3 col-md-2 sidebar">
 
-            <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-                <li><a href="../views/users/profile.view.html">Profile</a></li>
-                <li><a href="../views/admin/admin.view.html">Admin</a></li>
-                <li><a href="../views/forms/forms.view.html">Forms</a></li>
+            <ul class="nav nav-sidebar" ng-controller="SidebarController">
+                <li><a href="#/home" class="btn" ng-class="{'btn-primary' : $location.url() == '/home'}">Home</a></li>
+                <li><a href="#/profile" class="btn" ng-class="{'btn-primary' : $location.url() == '/profile'}">Profile</a></li>
+                <li><a href="#/admin" class="btn" ng-class="{'btn-primary' : $location.url() == '/register'}">Admin</a></li>
+                <li><a href="#/forms" class="btn" ng-class="{'btn-primary' : $location.url() == '/forms'}">Forms</a></li>
             </ul>
 </div>

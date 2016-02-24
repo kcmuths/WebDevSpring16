@@ -1,3 +1,9 @@
-/**
- * Created by K.C on 2/21/2016.
- */
+"use strict";
+(function(){
+    angular
+        .module("FormBuiderApp")
+        .controller("SidebarController", SidebarController);
+    function SidebarController($scope, $location){
+        $scope.$location = $location;
+    }
+})();
