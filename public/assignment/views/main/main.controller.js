@@ -2,8 +2,10 @@
 (function(){
     angular
         .module("FormBuilderApp")
-        .controller("SidebarController", SidebarController);
-    function SidebarController($scope, $location){
+        .controller("MainController", MainController);
+
+    function MainController($scope, $location){
         $scope.$location = $location;
     }
+
 })();
