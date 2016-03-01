@@ -13,7 +13,7 @@
             $scope.register = function () {
                 UserService.createUser($scope.user, function (new_user) {
                     $rootScope.currentUser = new_user;
-                    $location.url('/profile');
+                    $location.url('/views/users/profile');
                 });
             }
         }

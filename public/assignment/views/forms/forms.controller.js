@@ -24,7 +24,7 @@
             }
         }
         $scope.deleteForm = function(index){
-            FormService.deleteFormById($$scope.forms[index]._id, function(forms){
+            FormService.deleteFormById($scope.forms[index]._id, function(forms){
                 $scope.forms.splice(index, 1);
             });
         }

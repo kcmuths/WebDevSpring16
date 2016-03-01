@@ -4,8 +4,9 @@
     angular
         .module("FormBuilderApp")
         .factory("UserService", UserService);
-    function UserService() {
-        var users = [
+    function UserService($rootScope) {
+        var model = {
+            users: [
             {
                 "_id": 123, "firstName": "Alice", "lastName": "Wonderland",
                 "username": "alice", "password": "alice", "roles": ["student"]
@@ -26,58 +27,87 @@
                 "_id": 567, "firstName": "Edward", "lastName": "Norton",
                 "username": "ed", "password": "ed", "roles": ["student"]
             }
-        ];
+        ],
 
-        var user_service = {
+
             findUserByCredentials: findUserByCredentials,
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
-            updateUser: updateUser
+            updateUser: updateUser,
+            setCurrentUser: setCurrentUser,
+            getCurrentUser: getCurrentUser,
+            findUserById: findUserById
         };
-        return user_service;
+        return model;
+
+        function setCurrentUser(user){
+            $rootScope.currentUser = user;
+        }
+
+        function getCurrentUser(){
+            return $rootScope.currentUser;
+        }
 
         function findUserByCredentials(username, password, callback) {
 
-            users.forEach(function (ele) {
-                if (ele.username == username && ele.password == password) {
-                    callback(ele);
-                }
+            for (var u in model.users) {
 
-            })
+                if (model.users[u].username == username && model.users[u].password == password) {
+                    callback(model.users[u]);
+            }
+
+            }
             return null;
         }
 
 
         function findAllUsers(callback) {
-            callback(users);
+            callback(model.users);
         }
 
         function createUser(user, callback) {
-            user._id = (new Date).getTime();
-            users.push(user);
-            callback(user);
+            var new_user = {
+                _id: (new Date).getTime(),
+                username: user.username,
+                password: user.password
+
+            };
+            model.users.push(user);
+            callback(new_user);
         }
 
         function deleteUserById(userId, callback) {
-            users.forEach(function (ele, index) {
-                if (ele._id == userId) {
-                    users.splice(index, 1);
-                    callback(users);
+            for (var u in model.users) {
+                if (model.users[u]._id == userId) {
+                    var tmp = model.users[u];
+                    model.users.pop(tmp);
+                    callback(model.users);
                 }
-            })
+            }
+        }
+
+        function findUserById(userId){
+            for (var u in model.users){
+                if(model.users[u]._id === userId){
+                    return model.users[u];
+                }
+            }
+            return null;
         }
 
         function updateUser(userId, user, callback) {
-            for (var ele = 0; ele < users.length; ele++) {
-                if (users[ele]._id == _id) {
-                    users[ele] = user;
-                    var user_update = users[ele];
-                    break;
-                }
-                else user_update = null;
+            var user = model.findUserById(currentUser.userId);
+            if(user != null) {
+                user.firstName = currentUser.firstName;
+                user.lastName = currentUser.lastName;
+                user.password = currentUser.password;
+                callback(user);
             }
-            callback(user_update);
+            else {
+                return null;
+            }
+
         }
     }
 

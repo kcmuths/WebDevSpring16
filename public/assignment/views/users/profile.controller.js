@@ -9,12 +9,10 @@
         $scope.update = update;
         $scope.user = $rootScope.currentUser;
 
-        function update() {
-            $scope.update = function () {
-                UserService.updateUser($scope.user._id, $scope.user, function (updated_user) {
+        function update(user) {
 
-                });
-            }
+            var user = UserService.updateUser($scope.user._id, $scope.user);
+
         }
 
     }

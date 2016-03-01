@@ -1,5 +1,5 @@
 "use strict";
-(function(){
+(function() {
     angular
         .module("FormBuilderApp")
         .controller("LoginController", LoginController);
@@ -8,15 +8,12 @@
         $scope.$location = $location;
         $scope.login = login;
 
-        function login() {
-            $scope.login = function () {
-                UserService.findUserByCredentials(
-                    $scope.user.username,
-                    $scope.user.password,
-                    function (user) {
-                        $rootScope.currentUser = user;
-                        $location.url('/profile');
-                    });
+        function login(user) {
+            var user = UserService.findUserByCredentials({username: user.username, password: user.password});
+            if (user) {
+                $rootScope.currentUser = user;
+                UserService.setCurrentUser(user);
+                $location.url("/profile");
             }
         }
     }
