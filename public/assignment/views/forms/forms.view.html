@@ -1,25 +1,12 @@
 
 
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li><a href="../views/home/home.view.html">Home <span class="sr-only">(current)</span></a></li>
-                <li><a href="../views/users/profile.view.html">Profile</a></li>
-                <li><a href="../views/admin/admin.view.html">Admin</a></li>
-                <li class="active"><a href="forms.view.html">Forms</a></li>
-            </ul>
-
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1>Forms</h1>
-            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <h1 class="page-header">Forms</h1>
                 <ul class="nav nav-tabs">
-                    <li class="active" role="presentation"><a href="#">Forms</a></li>
+                    <li class="active" role="presentation"><a href="#/forms">Forms</a></li>
                     <li role="presentation"><a href="form-fields.view.html">Fields</a></li>
                 </ul>
-            <table class="table-responsive">
-                <table class="table table-striped table-bordered">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered" ng-controller ="FormController">
                     <thead>
                     <tr>
                         <th>
@@ -33,49 +20,25 @@
                     <tbody>
                     <tr>
                         <td>
-                            <input type="text" name="name" placeholder="name" class="form-control">
+                            <input type="text" name="name" placeholder="name" class="form-control" ng-model="newForm.name">
                         </td>
                         <td>
-                            <a class="colorer" href="#">
+                            <a class="colorer" ng-click="addForm()">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </a>
-                            <a class="colorer" href="#" >
+                            <a class="colorer" ng-click="updateForm()">
                                 <span class="glyphicon glyphicon-ok"></span>
                             </a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Registration Form</td>
+                    <tr ng-repeat="form in forms">
+                        <td>{{form.name}}</td>
 
                         <td>
-                            <a class="colorer" href="#">
+                            <a class="colorer" ng-click="deleteForm($index)">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </a>
-                            <a class="colorer" href="#" >
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Contact List</td>
-
-                        <td>
-                            <a class="colorer" href="#">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </a>
-                            <a class="colorer" href="#" >
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>To Do List</td>
-
-                        <td>
-                            <a class="colorer" href="#">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </a>
-                            <a class="colorer" href="#" >
+                            <a class="colorer" ng-click="selectForm($index)">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </a>
                         </td>
@@ -84,7 +47,6 @@
                     </tbody>
 
                 </table>
-                </div>
 
             </div>
 
@@ -92,5 +54,4 @@
 
 
 
-        </div>
-    </div>
+
