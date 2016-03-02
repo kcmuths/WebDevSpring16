@@ -20,19 +20,19 @@
                     <tbody>
                     <tr>
                         <td>
-                            <input type="text" name="name" placeholder="name" class="form-control" ng-model="newForm.name">
+                            <input type="text" name="name" placeholder="name" class="form-control" ng-model="Title">
                         </td>
                         <td>
-                            <a class="colorer" ng-click="addForm()">
+                            <a class="colorer" ng-click="addForm(Title)">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </a>
-                            <a class="colorer" ng-click="updateForm()">
+                            <a class="colorer" ng-click="updateForm(Title)">
                                 <span class="glyphicon glyphicon-ok"></span>
                             </a>
                         </td>
                     </tr>
-                    <tr ng-repeat="form in forms">
-                        <td>{{form.name}}</td>
+                    <tr ng-repeat="form in userForms">
+                        <td>{{form.title}}</td>
 
                         <td>
                             <a class="colorer" ng-click="deleteForm($index)">

@@ -20,17 +20,15 @@
         return model;
 
         function createFormForUser(userId, form, callback){
-            var new_form = {
-                _id: (new Date).getTime(),
-                userId: form.userId
-            };
-            model.forms.push(newform);
-            callback(new_form);
+                form._id = (new Date).getTime();
+                form.userId = userId;
+            model.forms.push(form);
+            callback(form);
         }
 
         function findAllFormsForUser(userId, callback){
             var searchForms = [];
-            forms.forEach(function(ele){
+            model.forms.forEach(function(ele){
                 if (model.forms[ele].userId == userId){
                     searchForms.push(ele);
                 }
