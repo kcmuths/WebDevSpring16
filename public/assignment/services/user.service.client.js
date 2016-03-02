@@ -49,11 +49,11 @@
             return $rootScope.currentUser;
         }
 
-        function findUserByCredentials(username, password, callback) {
+        function findUserByCredentials(user, callback) {
 
             for (var u in model.users) {
 
-                if (model.users[u].username == username && model.users[u].password == password) {
+                if (model.users[u].username == user.username && model.users[u].password == user.password) {
                     callback(model.users[u]);
             }
 
@@ -96,7 +96,7 @@
             return null;
         }
 
-        function updateUser(userId, user, callback) {
+        function updateUser(currentUser, callback) {
             var user = model.findUserById(currentUser.userId);
             if(user != null) {
                 user.firstName = currentUser.firstName;
