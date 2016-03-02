@@ -36,8 +36,7 @@
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser,
-            findUserById: findUserById
+            getCurrentUser: getCurrentUser
         };
         return model;
 
@@ -87,28 +86,28 @@
             }
         }
 
-        function findUserById(userId){
-            for (var u in model.users){
-                if(model.users[u]._id === userId){
-                    return model.users[u];
+        /*function findUserById(userId){
+          //  for (var u in model.users){
+            //    if(model.users[u]._id === userId){
+              //      return model.users[u];
+               // }
+            //}
+            //return null;
+        //} */
+
+        function updateUser(userId, user, callback) {
+            for (var u in model.users) {
+                if (model.users[u]._id == userId) {
+                    var new_User = model.users[u];
+                    new_User.firstName = user.firstName;
+                    new_User.lastName = user.lastName;
+                    callback(new_User);
                 }
             }
-            return null;
         }
 
-        function updateUser(currentUser, callback) {
-            var user = model.findUserById(currentUser.userId);
-            if(user != null) {
-                user.firstName = currentUser.firstName;
-                user.lastName = currentUser.lastName;
-                user.password = currentUser.password;
-                callback(user);
-            }
-            else {
-                return null;
-            }
 
-        }
+
     }
 
 })();
