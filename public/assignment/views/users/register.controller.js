@@ -5,7 +5,6 @@
         .controller("RegisterController", RegisterController);
 
     function RegisterController($rootScope, $scope, $location, UserService) {
-        $scope.$location = $location;
         $scope.register = register;
         $scope.message = null;
 
@@ -27,14 +26,20 @@
                 $scope.message = "Passwords should match";
                 return;
             }
-            var user = UserService.findUserByCredentials(user.username, user.password);
-            if (user != null) {
+            var tmpUser;
+            var callback = function (user) {
+                tmpUser = user;
+            }
+            UserService.findUserByCredentials(user.username, user.password, callback);
+            if (tmpUser != null) {
                 $scope.message = "User Already exists";
                 return;
             }
-            var newUser = UserService.createUser($scope.user);
-            UserService.setCurrentUser(newUser);
-            $location.url("/profile");
+            else {
+                UserService.createUser($scope.user, callback);
+                UserService.setCurrentUser(tmpUser);
+                $location.url("/profile");
+            }
         }
     }
 
