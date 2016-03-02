@@ -73,7 +73,7 @@
                 password: user.password
 
             };
-            model.users.push(user);
+            model.users.push(new_user);
             callback(new_user);
         }
 
