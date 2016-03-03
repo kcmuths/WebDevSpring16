@@ -4,62 +4,81 @@
         .module("FormBuilderApp")
         .controller("FormController", FormController);
 
-    function FormController($rootScope, $scope, FormService){
+    function FormController($rootScope, $scope, $location, FormService) {
+        /*console.log("form build");
+
+        $scope.user = $rootScope.user;
+        if (!$scope.user) {
+            $location.url('/home');
+        }
+         if($rootScope.user != undefined){
+            var userId;
+                userId = $rootScope.user._id;
+            FormService.findAllFormsForUser(
+                userId,
+                function (form) {
+                    console.log(form);
+                    $scope.forms = form;
+                }
+            );
+        }*/
+
         $scope.addForm = addForm;
         $scope.updateForm = updateForm;
         $scope.deleteForm = deleteForm;
         $scope.selectForm = selectForm;
 
-        var user = $rootScope.currentUser;
+        var indice = -1;
+        var userId;
 
-        getCurrentForms(user);
-        function getCurrentForms(user){
-            var callback = function (currentForms) {
-                $scope.currentForms = currentForms;
-            };
-            FormService.findAllFormsForUser(user._id, callback);
+
+        function addForm(formEle) {
+            if (!formEle || !formEle.title) {
+                return;
+            }
+            FormService.createFormForUser(userId, formEle, function (forms) {
+                FormService.findAllFormsForUser(userId, function (forms) {
+                    $scope.forms = forms;
+                    $scope.form = {};
+                    indice = -1;
+
+                })
+
+            })
         }
 
-        function addForm(Title){
-            var new_form = {title:Title};
-            var callback = function (form) {
-                FormService.findAllFormsForUser(
-                    user._id,
-                    function(userForms){
-                        $scope.userForms = userForms;
-                    });
-            };
-            FormService.createFormForUser(user._id, new_form, callback);
-
+        function updateForm(formEle) {
+            if (!formEle || !formEle.title) {
+                return;
+            }
+            FormService.updateFormById(formEle._id, formEle, function (form) {
+                if (indice >= 0) {
+                    $scope.forms[indice] = form;
+                    $scope.form = {};
+                }
+            })
         }
 
-        function updateForm(Title){
-            var new_form = {
-                _id: $scope.selectedForm.userId
 
-            };
-            var callback = function (form){
-                FormService.findAllFormsForUser(
-                    user._id,
-                    function (userForms){
-                        $scope.userForms = userForms;
-                    });
-            };
-            FormService.updateFormById(new_form._id, new_form, callback);
-        }
+        function deleteForm(index) {
+            FormService.deleteFormById($scope.forms[index]._id, function (forms) {
+                FormService.findAllFormsForUser(userId, function (form) {
 
-        function deleteForm(index){
-            var callback = function(form) {
-                FormService.findAllFormsForUser(user._id, function(userForms){
-                    $scope.userForms = userForms;
-                });
-            };
-            FormService.deleteFormById($scope.userForms[index]._id, callback);
+                    $scope.forms = form;
+                    $scope.form = {};
+                    indice = -1;
+                })
+            })
         }
 
         function  selectForm(index) {
-            $scope.selectedForm = $scope.userForms[index];
-            $scope.Title = $scope.selectedForm.title;
+            indice = index;
+            var formSelect ={
+                "_id": $scope.forms[index]._id,
+                "title": $scope.forms[index].title,
+                "userId":$scope.forms[index].userId
+            };
+            $scope.form = formSelect;
         }
 
     }
