@@ -33,8 +33,7 @@
 
         function findAllFormsForUser(userId, callback) {
             var searchForms = [];
-            var u ="";
-            for (u in forms) {
+            for (var u =0; u <forms.length; u ++){
                 if (forms[u].userId == userId) {
                     searchForms.push(forms[u]);
                 }

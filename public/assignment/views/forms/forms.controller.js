@@ -5,23 +5,17 @@
         .controller("FormController", FormController);
 
     function FormController($rootScope, $scope, $location, FormService) {
-        /*console.log("form build");
+        var user = $rootScope.currentUser;
 
-        $scope.user = $rootScope.user;
-        if (!$scope.user) {
-            $location.url('/home');
+        getForms(user);
+        function getForms(user) {
+            var callback = function (userForms) {
+                $scope.userForms = userForms;
+            };
+
+            FormService.findAllFormsForUser(userId, callback);
         }
-         if($rootScope.user != undefined){
-            var userId;
-                userId = $rootScope.user._id;
-            FormService.findAllFormsForUser(
-                userId,
-                function (form) {
-                    console.log(form);
-                    $scope.forms = form;
-                }
-            );
-        }*/
+
 
         $scope.addForm = addForm;
         $scope.updateForm = updateForm;
