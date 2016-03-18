@@ -23,6 +23,10 @@
                 templateUrl:"views/forms/forms.view.html",
                 controller:"FormController"
             })
+            .when("/user/:userId/form/:formId/fields",{
+                templateUrl:"views/forms/form-fields.view.html",
+                controller:"FieldController"
+            })
             .when("/admin",{
                 templateUrl:"views/admin/admin.view.html"
             })

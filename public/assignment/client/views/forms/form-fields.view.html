@@ -1,143 +1,181 @@
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">Fields</h1>
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="#/form">Forms</a></li>
+        <li class="active" role="presentation"><a href="">Fields</a></li>
+    </ul>
+    <br>
+    <div class="box-2" ng-controller="FieldController">
+        <form class="form-horizontal">
+            <ul class="form-fields">
+                <div ng-repeat="field in model.fields" ng-switch="field.type">
+                    <li>
+                        <div class="form-group">
+                            <label for="{{field.label}}" class="control-label">{{field.label}}</label>
 
+                            <div ng-switch-when='Text'>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <input type="text" ng-model="field.label" class="form-control" placeholder="{{field.placeholder}}">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <button type="button" ng-click="model.edit($index)" class="btn btn-default btn-transparent" aria-label="edit">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"> </span>
+                                        </button>
+                                        <button type="button" ng-click="model.clone($index)" class="btn btn-default btn-transparent" aria-label="clone">
+                                            <span class="glyphicon glyphicon-copy" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" ng-click="model.deleteField($index)" class="btn btn-default btn-transparent" aria-label="remove">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" ng-click="model.reorder()" class="btn btn-default btn-transparent" aria-label="reorder">
+                                            <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
 
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li><a href="../views/home/home.view.html">Home <span class="sr-only">(current)</span></a></li>
-                <li><a href="../views/users/profile.view.html">Profile</a></li>
-                <li><a href="../views/admin/admin.view.html">Admin</a></li>
-                <li class="active"><a href="#">Forms</a></li>
+                            <div ng-switch-when='TextArea'>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                            <textarea rows="3" type="text" ng-model="field.label"
+                                                      class="form-control" placeholder="{{field.placeholder}}"></textarea>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <button type="button" ng-click="model.edit($index)" class="btn btn-default btn-transparent" aria-label="edit">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"> </span>
+                                        </button>
+                                        <button type="button" ng-click="model.clone($index)" class="btn btn-default btn-transparent" aria-label="clone">
+                                            <span class="glyphicon glyphicon-copy" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" ng-click="model.deleteField($index)" class="btn btn-default btn-transparent" aria-label="remove">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" ng-click="model.reorder()" class="btn btn-default btn-transparent" aria-label="reorder">
+                                            <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-switch-when='Date'>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <input type="date" class="form-control">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <button type="button" ng-click="model.edit($index)" class="btn btn-default btn-transparent" aria-label="edit">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"> </span>
+                                        </button>
+                                        <button type="button" ng-click="model.clone($index)" class="btn btn-default btn-transparent" aria-label="clone">
+                                            <span class="glyphicon glyphicon-copy" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" ng-click="model.deleteField($index)" class="btn btn-default btn-transparent" aria-label="remove">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" ng-click="model.reorder()" class="btn btn-default btn-transparent" aria-label="reorder">
+                                            <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-switch-when='Dropdown'>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <select>
+                                            <option ng-repeat="option in field.options" value="{{option.value}}">{{option.label}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <button type="button" ng-click="model.edit($index)" class="btn btn-default btn-transparent" aria-label="edit">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"> </span>
+                                        </button>
+                                        <button type="button" ng-click="model.clone($index)" class="btn btn-default btn-transparent" aria-label="clone">
+                                            <span class="glyphicon glyphicon-copy" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" ng-click="model.deleteField($index)" class="btn btn-default btn-transparent" aria-label="remove">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" ng-click="model.reorder()" class="btn btn-default btn-transparent" aria-label="reorder">
+                                            <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-switch-when='Checkboxes'>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div ng-repeat="option in field.options">
+                                            <input type="checkbox" value="{{option.value}}"/>{{option.label}}
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <button type="button" ng-click="model.edit($index)" class="btn btn-default btn-transparent" aria-label="edit">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"> </span>
+                                        </button>
+                                        <button type="button" ng-click="model.clone($index)" class="btn btn-default btn-transparent" aria-label="clone">
+                                            <span class="glyphicon glyphicon-copy" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" ng-click="model.deleteField($index)" class="btn btn-default btn-transparent" aria-label="remove">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" ng-click="model.reorder()" class="btn btn-default btn-transparent" aria-label="reorder">
+                                            <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-switch-when='Radio'>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div ng-repeat="option in field.options">
+                                            <input type="radio" name="{{field._id}}" value="{{option.value}}"/>{{option.label}}
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <button type="button" ng-click="model.edit($index)" class="btn btn-default btn-transparent" aria-label="edit">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"> </span>
+                                        </button>
+                                        <button type="button" ng-click="model.clone($index)" class="btn btn-default btn-transparent" aria-label="clone">
+                                            <span class="glyphicon glyphicon-copy" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" ng-click="model.deleteField($index)" class="btn btn-default btn-transparent" aria-label="remove">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" ng-click="model.reorder()" class="btn btn-default btn-transparent" aria-label="reorder">
+                                            <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </li>
+                </div>
             </ul>
+        </form>
 
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1>Forms: Registration Form</h1>
-            <ul class="nav nav-tabs">
-                <li role="presentation"><a href="forms.view.html">Forms</a></li>
-                <li class="active" role="presentation"><a href="#">Fields</a></li>
-            </ul>
-            <form>
-                <div class="form-group">
-                    <label for="First_Name">First Name:</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="First_Name" placeholder="First Name">
-                        <span class="input-group-btn">
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-pencil"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-copy"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-sort"></span></button></a>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="Last_Name">Last Name:</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="Last_Name" placeholder="Last Name">
-                        <span class="input-group-btn">
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-pencil"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-copy"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-sort"></span></button></a>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="DOB">Date of Birth:</label>
-                    <div class="input-group">
-                        <input type="date" class="form-control" name="DOB">
-                        <span class="input-group-btn">
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-pencil"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-copy"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-sort"></span></button></a>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="Gender">Gender:</label>
-                    <div class="input-group">
-                        <select class="form-control">
-                            <option value="" disabled selected>Please Select</option>
-                            <option>Male</option>
-                            <option>Female</option>
-                        </select>
-                        <span class="input-group-btn">
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-pencil"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-copy"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-sort"></span></button></a>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="Roles">Roles</label>
-                    <div class="input-group">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="Admin">
-                                Admin
-                            </label>
+        <hr/>
 
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="Student">
-                                Student
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="User">
-                                User
-                            </label>
-                        </div>
-                        <span class="input-group-btn">
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-pencil"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-copy"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-sort"></span></button></a>
-                    </div>
-
-                </div>
-                <div class="form-group">
-                    <label for="licence">Licence Agreement</label>
-                    <div class="input-group">
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="licence" id="Agree" value="Agree" checked>
-                                Yes
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="licence" id="Disagree" value="Disagree">
-                                No
-                            </label>
-                        </div>
-                        <span class="input-group-btn">
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-pencil"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-copy"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></button></a>
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-sort"></span></button></a>
-                    </div>
-                </div>
-                <hr>
-                <div class="form-group">
-                    <label for="Add-new">Add New Field</label>
-                    <div class="input-group">
-                        <select class="form-control">
-                            <option>Single Line Text</option>
-                            <option>Date</option>
-                            <option>Dropdown</option>
-                            <option>Checkboxes</option>
-                            <option>Radio Buttons</option>
-                            <option>Paragraph Text Field</option>
-                        </select>
-                        <span class="input-group-btn">
-                            <a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button></a>
-                        </span>
-                    </div>
-                </div>
-            </form>
+        <div class="form-group col-lg-10">
+            <label for="newField">Add New Field:</label>
+            <br>
+            <select id="newField" class="form-control" ng-model = "model.fieldType">
+                <option value="Text">Single Line Text Field</option>
+                <option value="TextArea">Multi Line Text Field</option>
+                <option value="Date">Date Field</option>
+                <option value="Dropdown">Dropdown Field</option>
+                <option value="Checkboxes">Checkboxes Field</option>
+                <option value="Radio">Radio Buttons Field</option>
+            </select>
+            <div class="allicons btn btn-primary">
+                <span class="glyphicon glyphicon-copy" ng-click="model.addField(model.fieldType)" aria-hidden="true"></span>
+            </div>
         </div>
     </div>
+</div>
