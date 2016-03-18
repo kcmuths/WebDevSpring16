@@ -15,39 +15,42 @@ module.exports = function(app){
     return api;
 
     function Create(user) {
-        user._id = uUid.v1();
-        users.push(user);
-        return user;
+        var newUser = {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            username: user.username,
+            password: user.password,
+            _id: (new Date).getTime()
+        };
+        users.push(newUser);
+        return users;
     }
     function FindAll(){
         return users;
     }
-    function FindById(_id){
-        for (var i = 0; i< users.length; i++)
+    function FindById(id){
+        for (var i in users)
         {
-            if (users._id == _id)
+            if (users[i]._id == id)
             return users[i];
         }
         return null;
     }
-    function Update(_id, new_user){
-        var user = FindById(_id);
-        console.log("calling update, respond ");
-        for(var i in new_user)
-        {
-            user[i] = new_user[i];
-        }
+    function Update(id, user) {
+        var chUser = users.indexOf(id);
+        users[chUser].username = user.username;
+        users[chUser].firstName = user.firstName;
+        users[chUser].lastName = user.lastName;
         return users;
     }
-    function Delete(_id){
-        var i = users.findIndex(function (item, i, array){
-            return item._id == _id;
-        });
-        if (i != -1){
-            user.splice(i,1);
-        }
+
+    function Delete(id){
+        var i = FindById(id);
+        var delUser = users.indexOf(i);
+        users.splice(delUser,1);
         return users;
-    }
+        }
+
     function FindUserByUsername(username){
         for(var i=0;i < users.length; i++)
         {

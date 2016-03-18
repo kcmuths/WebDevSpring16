@@ -1,33 +1,24 @@
 "use strict";
 module.exports = function(app, model){
     app.post('/api/assignment/user', function(req, res){
-        res.json(model.Create(req.body));
+        res.json(model.Create(req.params.user));
     });
     app.get('/api/assignment/user', function(req,res){
-        var username = req.param('username');
-        var password = req.param('password');
-
-        if(username == null && password == null)
-        {
-            res.json(model.FindAll());
-            return;
-        }
-        if(password == null){
-            res.json(model.FindUserByUsername(username));
-            return;
-        }
-        res.json(model.FindUserByCredentials({
-            username: username,
-            password: password
-        }));
+        res.json(model.FindAll());
     });
-    app.get('api/assignment/user/:id', function(req, res){
-        res.json(model.FindById(req.params._id));
+    app.get('/api/assignment/user/:id', function(req,res){
+        res.json(model.FindById(req.params.id));
     });
-    app.put('api/assignment/user/:id', function(req, res){
-        res.json(model.Update(req.params._id, req.body));
+    app.get('api/assignment/user?username=username', function(req, res){
+        res.json(model.FindUserByUsername(req.params.username));
+    });
+    app.get('api/assignment/user?username=alice&password=wonderland', function(req, res){
+        res.json(model.FindUserByCredentials(req.params));
+    });
+    app.put('/api/assignment/user/:id', function(req, res){
+        res.json(model.Update());
     });
     app.delete('/api/assignment/user/:id', function(req, res){
-        res.json(model.Delete(req.params._id));
+        res.json(model.Delete(req.params.id));
     });
 };

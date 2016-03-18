@@ -1,8 +1,9 @@
 "use strict";
+var forms = require('./form.mock.json');
 var uUid = require('node-uuid');
 
 module.exports = function(app){
-    var forms = require('./form.mock.json');
+
     var api = {
         CreateForm: CreateForm,
         FindAllForms: FindAllForms,
@@ -12,30 +13,39 @@ module.exports = function(app){
         FindFieldById: FindFieldById,
         UpdateForm: UpdateForm,
         DeleteForm: DeleteForm,
-        RemoveField: RemoveField,
-        AddField: AddField,
-        UpdateField: UpdateField
+      //  RemoveField: RemoveField,
+        //AddField: AddField,
+        //UpdateField: UpdateField
     };
     return api;
 
     function CreateForm(form) {
-        forms.push(form);
+        var newForm= {
+            _id: (new Date).getTime(),
+            title: form.title,
+            userId: form.userId
+        };
+        forms.push(newForm);
         return forms;
     }
     function FindAllForms() {
         return forms;
     }
 
-    function FindFormById(_id) {
-        return forms.find(function(item, index, array) {
-            return item._id === _id;
-        });
+    function FindFormById(id) {
+        for(var i in forms){
+            if(forms[i]._id == id)
+            return forms[i];
+        }
+        return null;
     }
 
     function FindFormByTitle(title) {
-        return forms.filter(function(item, index, array) {
-            return item.title === title;
-        });
+        for (var i in forms) {
+            if (forms[i].title == title)
+                return forms[i];
+        }
+        return null;
     }
 
     function FindFormByUserId(user_id) {
@@ -51,25 +61,20 @@ module.exports = function(app){
         });
     }
 
-    function UpdateForm(_id, update_form) {
-        var form = FindById(_id);
-        for(var i in update_form) {
-            form[i] = update_form[i];
-        }
+    function UpdateForm(id, form) {
+        var upForm = forms.indexOf(id);
+        forms[upForm].title = form.title;
         return forms;
     }
 
-    function DeleteForm(_id) {
-        var index = forms.findIndex(function (item, index, array) {
-            return item._id === _id;
-        });
-        if (index != -1) {
-            forms.splice(index, 1);
-        }
+    function DeleteForm(id) {
+        var i = FindFormById(id);
+        var delForm = forms.indexOf(i);
+        forms.splice(delForm, 1);
         return forms;
     }
 
-    function RemoveField(form_id, field_id) {
+    /*function RemoveField(form_id, field_id) {
         var form = FindById(form_id);
         var fieldIndex = form.fields.findIndex(function(item, index, array) {
             return item._id === field_id;
@@ -90,6 +95,6 @@ module.exports = function(app){
         for(var i in update_field) {
             field[i] = update_field[i];
         }
-    }
+    }  */
 };
 
