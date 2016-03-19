@@ -7,40 +7,30 @@
     function RegisterController($rootScope, $scope, $location, UserService) {
         $scope.register = register;
         $scope.message = null;
+        $scope.user = null;
 
-        function register(user) {
-            $scope.message = null;
-            if (user == null) {
-                $scope.message = " Please fill all fields";
-                return;
-            }
-            if (!user.username) {
-                $scope.message = "Please provide an username";
-                return;
-            }
-            if (!user.password || !user.password2) {
-                $scope.message = "Please provide a password";
-                return;
-            }
-            if (user.password != user.password2) {
-                $scope.message = "Passwords should match";
-                return;
-            }
-            var tmpUser;
-            var callback = function (user) {
-                tmpUser = user;
-            }
-            UserService.findUserByCredentials(user.username, user.password, callback);
-            if (tmpUser != null) {
-                $scope.message = "User Already exists";
-                return;
-            }
-            else {
-                UserService.createUser($scope.user, callback);
-                UserService.setCurrentUser(tmpUser);
-                $location.url("/profile");
-            }
+        var a = this;
+        a.register = register;
+        function init(){
+
         }
+        init();
+        function register(user){
+            if(!user){
+                console.log("please enter user to register");
+                return;
+            }
+            UserService
+                .createUser(user)
+                .then(function(response){
+                    var re = response.data;
+                    if(re != null){
+                        UserService.setCurrentUser(user);
+                        $location.url("/profile");
+                    }
+                });
+        }
+
     }
 
 })();
