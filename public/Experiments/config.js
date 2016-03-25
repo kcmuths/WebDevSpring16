@@ -3,8 +3,8 @@
     angular.module("FOrmBuilderApp")
     angular.config(function($routeProvider){
         $routeProvider
-            .when("/home",{
-                templateUrl:"./views/home/home.view.html"
+            .when("/admin",{
+                templateUrl:"./views/admin/admin.view.html"
             })
             .when("/login",{
                 templateUrl:"./views/users/login.view.html"
@@ -16,10 +16,10 @@
                 templateUrl:"./views/profile/profile.view.html"
             })
             .when("/forms",{
-                templateUrl:"./views/home/home.view.html"
+                templateUrl:"./views/admin/admin.view.html"
             })
             .otherwise({
-                redirectTo:"/home"
+                redirectTo:"/admin"
             });
 
 

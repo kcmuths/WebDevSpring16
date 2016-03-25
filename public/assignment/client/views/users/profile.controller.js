@@ -12,7 +12,7 @@
         console.log(UserService.getCurrentUser());
         a.currentUser = UserService.getCurrentUser();
         if(!$scope.currentUser){
-            $location.url("/home");
+            $location.url("/admin");
         }
 
         function updateUser(user){
