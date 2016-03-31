@@ -24,13 +24,15 @@
     <script src="login/login.controller.js"></script>
     <script src="register/register.controller.js"></script>
     <script src="search/search.controller.js"></script>
+    <script src="header/header.controller.js"></script>
 </head>
 
 <body>
- <div>
-                <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
-                <div ng-view></div>
-            </div>
+  <div>
+     <div class="container" ng-include="'views/header/header.view.html'"></div>
+     <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+     <div ng-view></div>
+  </div>
 
 </body>
 </html>

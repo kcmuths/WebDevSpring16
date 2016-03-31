@@ -1,6 +1,6 @@
-"use strict"
+
 (function(){
-    angular.module("FOrmBuilderApp")
+    angular.module("EventApp")
     angular.config(function($routeProvider){
         $routeProvider
             .when("/admin",{
