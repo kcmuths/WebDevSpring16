@@ -29,7 +29,6 @@ module.exports = function(app, model) {
     });
 
     app.post("/api/assignment/user/:userId/form", function(req, res) {
-        //console.log("Post got by web service");
         var user_id = req.params.userId
         model
             .Create(req.body, user_id)
