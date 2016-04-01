@@ -50,23 +50,23 @@
         }
 
         function findUserByUsername(username) {
-            var defer = $q.defer();
+            var deferred = $q.defer();
             var url = "/api/assignment/user?username=" + username;
-            console.log(url);
+     //       console.log(url);
             $http.get(url).success(function (response) {
-                defer.resolve(response);
+                deferred.resolve(response);
             });
-            return defer.promise;
+            return deferred.promise;
         }
 
         function findUserByCredentials(username, password) {
-            var defer = $q.defer();
+            var deferred = $q.defer();
             var url = "/api/assignment/user?username=" + username + "&password=" + password;
-            console.log(url);
+       //     console.log(url);
             $http.get(url).success(function(response){
-                defer.resolve(response);
+                deferred.resolve(response);
             });
-            return defer.promise;
+            return deferred.promise;
 
             /*for (var u in model.users) {
 
@@ -80,21 +80,21 @@
 
 
         function findAllUsers() {
-            var defer = $q.defer();
+            var deferred = $q.defer();
             var url = "api/assignment/user/";
             $http.get(url).success(function(response){
-                defer.resolve(response);
+                deferred.resolve(response);
             });
-            return defer.promise;
+            return deferred.promise;
         }
 
-        function createUser(user) {
-            var defer = $q.defer();
-            var url = "/api/assignment/user";
-            $http.post(url,user).success(function(response){
-                defer.resolve(response);
+        function createUser(add_user) {
+            var deferred = $q.defer();
+            $http.post("/api/assignment/user",add_user)
+                .success(function(response){
+                deferred.resolve(response);
             });
-            return defer.promise;
+            return deferred.promise;
 
             /*var new_user = {
                 _id: (new Date).getTime(),
@@ -106,47 +106,26 @@
             callback(new_user); */
         }
 
-        function deleteUserById(userId) {
-            var defer = $q.defer();
-            var url = "api/assignment/user/" + userId;
-            $http.delete(url, user).success(function(response){
-                defer.resolve(response);
+        function deleteUserById(user_id) {
+            var deferred = $q.defer();
+            var url = "api/assignment/user/" + user_id;
+            $http.delete(url, user_id).success(function(response){
+                deferred.resolve(response);
             });
-            return defer.promise;
-            /*for (var u in model.users) {
-                if (model.users[u]._id == userId) {
-                    var tmp = model.users[u];
-                    model.users.pop(tmp);
-                    callback(model.users);
-                }
-            } */
+            return deferred.promise;
+
         }
 
-        /*function findUserById(userId){
-          //  for (var u in model.users){
-            //    if(model.users[u]._id === userId){
-              //      return model.users[u];
-               // }
-            //}
-            //return null;
-        //} */
 
-        function updateUser(userId, user) {
-            var defer = $q.defer();
-            var url = "api/assignment/user/" + userId;
+        function updateUser(user_id, user_update) {
+            var deferred = $q.defer();
+            var url = "api/assignment/user/" + user_id;
             console.log(url);
-            $http.put(url,user).success(function(response){
-                defer.resolve(response);
+            $http.put(url,user_update).success(function(response){
+                deferred.resolve(response);
             });
-            return defer.promise;
-            /*for (var u in model.users) {
-                if (model.users[u]._id == userId) {
-                    var new_User = model.users[u];
-                    new_User.firstName = user.firstName;
-                    new_User.lastName = user.lastName;
-                    callback(new_User);
-                }
-            } */
+            return deferred.promise;
+
         }
 
     }

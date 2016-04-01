@@ -1,6 +1,4 @@
-
-
-                <h1 class="page-header">Forms</h1>
+ <h1 class="page-header">Forms</h1>
                 <ul class="nav nav-tabs">
                     <li class="active" role="presentation"><a href="#/forms">Forms</a></li>
                     <li role="presentation"><a href="#user">Fields</a></li>
@@ -20,19 +18,20 @@
                     <tbody>
                     <tr>
                         <td>
-                            <input ng-model="form.title" type="text" name="name" placeholder="name" class="form-control">
+                            <input ng-model="new_form.name" type="text" name="name" placeholder="name" class="form-control">
                         </td>
                         <td>
-                            <a class="colorer" ng-click="addForm(form)">
+                            <a class="colorer" ng-click="addForm()">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </a>
-                            <a class="colorer" ng-click="updateForm(form)">
+                            <a class="colorer" ng-click="updateForm()">
                                 <span class="glyphicon glyphicon-ok"></span>
                             </a>
                         </td>
                     </tr>
                     <tr ng-repeat="form in forms">
-                        <td>{{form.title}}</td>
+                        <td>
+                            <a ng-click="navigate($index)"></a></td>
 
                         <td>
                             <a class="colorer" ng-click="deleteForm($index)">

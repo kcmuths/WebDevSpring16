@@ -4,28 +4,20 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, $location, UserService){
-        var a = this;
-        a.updateUser = updateUser;
-        a.error = null;
-        a.message = null;
-        console.log(UserService.getCurrentUser());
-        a.currentUser = UserService.getCurrentUser();
-        if(!$scope.currentUser){
-            $location.url("/admin");
+    function ProfileController($scope, $location, UserService, $rootScope){
+        $scope.$location = $location;
+        $scope.user = $rootscope.currentUser;
+
+        $scope.update = function() {
+            UserService.updateUser($scope.user.id, $scope.user).then (function(user)
+            {
+                for(var i in user)
+                {
+                    $scope.user[i] = user[i];
+                }
+            });
         }
-
-        function updateUser(user){
-            console.log("controller");
-            UserService.updateUser(a.currentUser._id,user)
-                .then(function(response){
-                    UserService.setCurrentUser(a.currentUser);
-                    $location.url("/profile");
-                });
-        }
-
-
-
     }
 })();
+
 
