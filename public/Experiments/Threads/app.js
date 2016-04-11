@@ -15,6 +15,7 @@ app.controller('MainCtrl',['$scope','posts',function($scope, posts){
         {title: 'post 4', upvotes: 9},
         {title: 'post 5', upvotes: 4}
     ]; */
+    /* add POST controller */
     $scope.addPost = function(){
         if(!$scope.title || $scope.title === '')
         {
@@ -50,13 +51,19 @@ app.config([
         $urlRouterProvider.otherwise('home');
     }
 ]);
-
-app.controller('PostsCtrl', [
-    '$scope',
-    '$stateParams',
-    'posts',
-    function($scope, $stateParams, posts){
+/* POST controller */
+app.controller('PostsCtrl', ['$scope', '$stateParams', 'posts', function($scope, $stateParams, posts){
         $scope.post = posts.posts[$stateParams.id];
+    $scope.addComment = function(){
+        if($scope.body === ''){
+            return;
+        }
+        $scope.post.comments.push({
+            body: $scope.body,
+            author: 'user',
+            upvotes: 0
+        });
+        $scope.body = '';
+    };
 
-    }
-]);
+    }]);
