@@ -33,7 +33,7 @@ var db = mongoose.connect(connectionString);
 require("./public/Experiments/Threads/models/posts.js");
 require("./public/Experiments/Threads/models/comments.js");
 require("./public/assignment/server/app.js")(app, mongoose, db );
-//require("./public/Experiments/Threads/js/app.js")(app, mongoose, db);
+//require("./public/Experiments/Threads/js/app.js")(app, mongoose, db);.......
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
