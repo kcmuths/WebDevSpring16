@@ -100,7 +100,7 @@ $(function(){
                 var exturl = obj.url;
                 var timeago = timeSince(subtime);
                 if (obj.thumbnail === 'default' || obj.thumbnail === 'nsfw' || obj.thumbnail === '')
-                    thumb = 'img/default-thumb.png'; //yet to be added
+                    thumb = '../img/redditimg.png'; //yet to be added
 
                 html += '<li class="clearfix">\n';
                 html += '<img src="' + thumb + '" class="thumbimg">\n';
