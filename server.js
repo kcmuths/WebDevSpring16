@@ -30,8 +30,8 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
 }
 
 var db = mongoose.connect(connectionString);
-require("./public/Experiments/Threads/models/Posts.js");
-require("./public/Experiments/Threads/models/Comments.js");
+require("./public/Experiments/Threads/models/posts.js");
+require("./public/Experiments/Threads/models/comments.js");
 require("./public/assignment/server/app.js")(app, mongoose, db );
 //require("./public/Experiments/Threads/js/app.js")(app, mongoose, db);
 
