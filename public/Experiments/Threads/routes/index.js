@@ -45,8 +45,14 @@ router.param('post', function(req, res, next, id){
 });
 
 /*return a Single POST */
-router.get('/posts/:post', function(req,res){
-    res.json(req.post);
+router.get('/posts/:post', function(req,res, next){
+    req.post.populate('comments', function(err, post){
+        if(err){
+            return next(err);
+
+        }
+        res.json(req.post);
+    });
 });
 
 router.put('/posts/:post/upvote', function(req, res, next){
@@ -95,11 +101,11 @@ router.param('comment', function(req, res, next, id){
 });
 
 router.put('/posts/:post/comments/:comment/upvote', function(req, res, next){
-    req.post.upvote(function(err, post){
+    req.comment.upvote(function(err, comment){
         if(err){
             return next(err);
         }
-        res.json(post);
+        res.json(comment);
     });
 });
 
