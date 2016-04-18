@@ -43,16 +43,21 @@ app.config([
                 templateUrl: '/home.html',
                 controller: 'MainCtrl'
             })
-        .state('posts', {
+            .state('posts', {
             url: '/posts/{id}',
             templateUrl:'/posts.html',
             controller: 'PostsCtrl'
         })
-        .state('search', {
+            .state('search', {
             url: '/search',
             templateUrl: '/search.html',
             controller: 'SearchCtrl'
-        });
+        })
+            .state('header',{
+                url: 'header',
+                templateUrl: '/header.html',
+                controller: 'HeaderCtrl'
+            });
         $urlRouterProvider.otherwise('home');
     }
 ]);

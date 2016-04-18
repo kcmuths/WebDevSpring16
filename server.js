@@ -33,6 +33,9 @@ var db = mongoose.connect(connectionString);
 require("./public/Experiments/Threads/models/posts.js");
 require("./public/Experiments/Threads/models/comments.js");
 require("./public/assignment/server/app.js")(app, mongoose, db );
+
+//var routes = require('./public/Experiments/Threads/routes/index.js');
+//var users = require('./public/Experiments/Threads/routes/users');
 //require("./public/Experiments/Threads/js/app.js")(app, mongoose, db);.......
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
