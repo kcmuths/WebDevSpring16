@@ -31,7 +31,7 @@
                 templateUrl:"views/admin/admin.view.html"
             })
             .otherwise({
-                redirectTo:"/admin"
+                redirectTo:"/home"
             });
 
 
